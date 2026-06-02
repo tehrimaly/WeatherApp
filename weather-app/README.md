@@ -1,64 +1,85 @@
-# WeatherSphere — Full Stack Weather App
-**PM Accelerator | Full Stack Engineer Intern | Muhammad Hamza**
+# WeatherSphere — Full Stack Weather Application
 
----
+## Overview
 
-## About PM Accelerator
-PM Accelerator empowers aspiring and experienced product managers through mentorship, hands-on projects, and a vibrant global community. We accelerate careers by connecting talent with industry leaders across the world's top technology companies, equipping participants with real-world skills to drive product innovation and leadership.
+WeatherSphere is a full-stack weather application that provides real-time weather information, forecasts, traveler insights, and location-based services through a modern React frontend and a robust Node.js backend.
 
-🔗 [PM Accelerator on LinkedIn](https://www.linkedin.com/school/pmaccelerator/)
+The project includes advanced weather search capabilities, geolocation support, weather analytics, data export functionality, and a complete RESTful API backed by MongoDB.
 
 ---
 
 ## Assessments Completed
-- ✅ **Tech Assessment #1** — Frontend (React.js)
-- ✅ **Tech Assessment #2** — Backend (Node.js + Express + MongoDB)
 
-This submission covers **Full Stack** (highest priority candidate profile).
+- Frontend Development (React.js)
+- Backend Development (Node.js, Express.js, MongoDB)
 
 ---
 
 ## Features
 
-### Frontend (Assessment #1)
-- 🔍 Search by city, zip code, GPS coordinates, or landmark
-- 📍 Geolocation — detect user's current location
-- 🌡️ Current weather with full stats (humidity, wind, pressure, visibility, cloud cover, sunrise/sunset)
-- 📅 5-day forecast with daily high/low and precipitation probability
-- ✈️ Traveler Insights — clothing advice, UV index, driving conditions, umbrella needed, outdoor activity suitability, humidity comfort
-- 🌗 °C / °F unit toggle with live re-fetch
-- 🕓 Recent search history (localStorage)
-- ⚠️ Graceful error handling (404, timeout, geolocation denied, invalid API key)
-- 🎨 Responsive design — desktop, tablet, mobile
-- 🌤️ Dynamic background changes based on weather condition
+### Frontend
 
-### Backend (Assessment #2)
-- 📦 Full **CRUD** on weather queries stored in MongoDB
-- 📅 Date-range queries with validation
-- 🌍 Location validation via OpenWeatherMap Geocoding API
-- 🎬 YouTube video enrichment (location travel videos)
-- 🗺️ OpenStreetMap map data + static map URL
-- 📤 Data export in **5 formats**: JSON, CSV, XML, PDF, Markdown
-- 🔒 Input validation, rate limiting, error handling middleware
-- 📖 RESTful API design
+- Search weather by city, ZIP code, GPS coordinates, or landmarks
+- Automatic geolocation detection
+- Current weather conditions with detailed statistics:
+  - Temperature
+  - Humidity
+  - Wind Speed
+  - Atmospheric Pressure
+  - Visibility
+  - Cloud Coverage
+  - Sunrise and Sunset Times
+- 5-day weather forecast
+- Traveler insights including:
+  - Clothing recommendations
+  - UV index guidance
+  - Driving conditions
+  - Rain and umbrella recommendations
+  - Outdoor activity suitability
+  - Humidity comfort analysis
+- Celsius/Fahrenheit unit conversion
+- Recent search history using local storage
+- Comprehensive error handling
+- Responsive user interface for desktop, tablet, and mobile devices
+- Dynamic weather-based background themes
+
+### Backend
+
+- Complete CRUD operations for weather query management
+- Date-range weather query support
+- Location validation through OpenWeatherMap Geocoding API
+- Travel video enrichment using YouTube Data API
+- OpenStreetMap integration with static map support
+- Data export functionality in multiple formats:
+  - JSON
+  - CSV
+  - XML
+  - PDF
+  - Markdown
+- Input validation and sanitization
+- Rate limiting and security middleware
+- RESTful API architecture
 
 ---
 
-## Tech Stack
+## Technology Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Frontend | React 18, CSS3, OpenWeatherMap API |
+| Layer | Technologies |
+|---------|-------------|
+| Frontend | React 18, CSS3 |
 | Backend | Node.js, Express.js |
-| Database | MongoDB (Mongoose ODM) |
-| APIs | OpenWeatherMap, YouTube Data API v3, OpenStreetMap |
-| Export | PDFKit, xml2js, custom CSV |
-| Security | Helmet, express-rate-limit, express-validator |
+| Database | MongoDB, Mongoose |
+| Weather API | OpenWeatherMap API |
+| Maps | OpenStreetMap |
+| Media Integration | YouTube Data API v3 |
+| Export Services | PDFKit, XML2JS, Custom CSV Processing |
+| Security | Helmet, Express Rate Limit, Express Validator |
 
 ---
 
 ## Project Structure
-```
+
+```text
 weather-app/
 ├── frontend/
 │   ├── public/
@@ -98,66 +119,124 @@ weather-app/
 
 ---
 
-## Setup & Run
+## Installation
 
 ### Prerequisites
-- Node.js >= 18
-- MongoDB (local) or MongoDB Atlas (cloud)
-- OpenWeatherMap API key (free at https://openweathermap.org/api)
-- YouTube Data API v3 key (optional, from https://console.cloud.google.com)
+
+- Node.js 18 or later
+- MongoDB (Local Installation or MongoDB Atlas)
+- OpenWeatherMap API Key
+- YouTube Data API Key (Optional)
 
 ---
 
-### Backend Setup
+## Backend Setup
+
 ```bash
 cd weather-app/backend
+
 npm install
 
-# Copy and configure environment
 cp .env.example .env
-# Edit .env: add OPENWEATHER_API_KEY, MONGODB_URI, YOUTUBE_API_KEY
-
-npm run dev       # Development (nodemon)
-# or
-npm start         # Production
 ```
-Backend runs at: `http://localhost:5000`
 
----
+Configure the `.env` file:
 
-### Frontend Setup
+```env
+OPENWEATHER_API_KEY=your_api_key
+MONGODB_URI=your_mongodb_connection_string
+YOUTUBE_API_KEY=your_youtube_api_key
+```
+
+Run the backend server:
+
 ```bash
-cd weather-app/frontend
-npm install
+npm run dev
+```
 
-# Copy and configure environment
-cp .env.example .env
-# Edit .env: add REACT_APP_OPENWEATHER_API_KEY
+or
 
+```bash
 npm start
 ```
-Frontend runs at: `http://localhost:3000`
+
+Backend URL:
+
+```text
+http://localhost:5000
+```
 
 ---
 
-## API Reference (Backend)
+## Frontend Setup
 
-### Current Weather (no DB)
+```bash
+cd weather-app/frontend
+
+npm install
+
+cp .env.example .env
 ```
+
+Configure the `.env` file:
+
+```env
+REACT_APP_OPENWEATHER_API_KEY=your_api_key
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+Frontend URL:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## API Documentation
+
+### Current Weather
+
+```http
 GET /api/weather/current?location=London&units=metric
 ```
 
-### CRUD Operations
-```
-POST   /api/weather              Create a weather query record
-GET    /api/weather              List all records (paginated, filterable)
-GET    /api/weather/:id          Get single record
-PUT    /api/weather/:id          Update record
-DELETE /api/weather/:id          Delete record
-DELETE /api/weather              Delete all (requires header: x-confirm-delete: DELETE_ALL)
+---
+
+### Weather Query CRUD Operations
+
+```http
+POST   /api/weather
+GET    /api/weather
+GET    /api/weather/:id
+PUT    /api/weather/:id
+DELETE /api/weather/:id
+DELETE /api/weather
 ```
 
-### POST /api/weather — Request Body
+Bulk deletion requires:
+
+```http
+x-confirm-delete: DELETE_ALL
+```
+
+---
+
+### Create Weather Query
+
+#### Request
+
+```http
+POST /api/weather
+```
+
+#### Body
+
 ```json
 {
   "location": "Tokyo, Japan",
@@ -169,51 +248,92 @@ DELETE /api/weather              Delete all (requires header: x-confirm-delete: 
 }
 ```
 
-### Forecast
-```
+---
+
+### Forecast Endpoint
+
+```http
 GET /api/forecast?location=Paris&startDate=2024-06-01&endDate=2024-06-05&units=metric
 ```
 
-### Export
-```
-GET /api/export?format=json        → JSON file download
-GET /api/export?format=csv         → CSV file download
-GET /api/export?format=xml         → XML file download
-GET /api/export?format=pdf         → PDF file download
-GET /api/export?format=markdown    → Markdown file download
+---
 
-# Optional filters:
+### Export Endpoints
+
+```http
+GET /api/export?format=json
+GET /api/export?format=csv
+GET /api/export?format=xml
+GET /api/export?format=pdf
+GET /api/export?format=markdown
+```
+
+Example with filters:
+
+```http
 GET /api/export?format=csv&city=Tokyo&from=2024-01-01&to=2024-12-31&limit=50
 ```
 
-### GET Filters
-```
+---
+
+### Query Filters
+
+```http
 GET /api/weather?page=1&limit=20&city=London&from=2024-01-01&to=2024-12-31&favorite=true&search=tokyo
 ```
 
 ---
 
-## Getting API Keys
+## Obtaining API Keys
 
-### OpenWeatherMap (required for both frontend + backend)
-1. Go to https://openweathermap.org/api
-2. Sign up for a free account
-3. Navigate to "My API Keys"
-4. Copy your key to `.env`
-5. Note: free tier key activates within ~2 hours of registration
+### OpenWeatherMap API
 
-### YouTube Data API v3 (optional — enables travel video enrichment)
-1. Go to https://console.cloud.google.com
-2. Create a project → Enable "YouTube Data API v3"
-3. Create credentials → API Key
-4. Add to backend `.env` as `YOUTUBE_API_KEY`
+1. Create an account at https://openweathermap.org/api
+2. Generate an API key from your dashboard
+3. Add the key to your environment variables
+4. Allow up to two hours for activation on the free tier
+
+### YouTube Data API v3 (Optional)
+
+1. Visit https://console.cloud.google.com
+2. Create a new project
+3. Enable the YouTube Data API v3
+4. Generate API credentials
+5. Add the key to the backend environment configuration
 
 ---
 
-## Error Handling Examples
-- `404` — City/location not found → friendly message with suggestions
-- `401` — Invalid API key → clear configuration error message
-- Timeout → retry message with connection advice
-- Geolocation denied → fallback to manual search
-- Invalid date range → validation message
-- MongoDB connection failure → logged, API continues with error response
+## Error Handling
+
+The application includes comprehensive error handling for:
+
+- Invalid locations or city names
+- Invalid API credentials
+- Network timeouts
+- Geolocation permission denial
+- Invalid date ranges
+- Database connection failures
+- API rate limiting
+- Input validation errors
+
+All errors return structured responses with descriptive messages to improve user experience and debugging.
+
+---
+
+## Future Enhancements
+
+- User authentication and profiles
+- Weather alerts and notifications
+- Historical weather analytics
+- Interactive weather maps
+- Dashboard and reporting features
+- Cloud deployment support
+- Progressive Web App (PWA) support
+
+---
+
+## License
+
+This project is intended for educational, portfolio, and research purposes.
+
+---
