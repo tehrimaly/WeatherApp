@@ -1,4 +1,4 @@
-# WeatherSphere — Full Stack Weather Application
+# WeatherSphere Full Stack Weather Application
 
 ## Overview
 
